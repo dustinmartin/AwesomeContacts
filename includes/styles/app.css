@@ -1,0 +1,218 @@
+/* ---------------------------------------------------------
+   General
+   --------------------------------------------------------- */
+html {
+	/*  Fix the centering jumps because of scrollbar disappear/reappearing */
+	height: 101%;
+}
+
+body {
+	background-color: #576e74;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+div#application-container {
+    width:600px;
+    margin:0 auto;
+}
+
+.hidden {
+	display: none;
+}
+
+.clear {
+	clear: both;
+}
+
+a {
+	color: #93a1a1;
+}
+
+
+/* ---------------------------------------------------------
+   Header
+   --------------------------------------------------------- */
+
+.title {
+	height: 60px;
+	color: #93a1a1;
+	padding-top: 50px;
+	font-family: verdana;
+}
+
+.title h1 {
+	font-size: 30px;
+	margin-left: 15px;
+}
+
+.title a span {
+	color: #fff;
+}
+
+.title a {
+	text-decoration: none;
+}
+
+.title span.subtitle {
+	margin-left: 35px;
+}
+
+.title .loading {
+	text-align: right;
+	font-size: 10px;
+	color: #fff;
+}
+
+.title .loading span {
+	display: none;
+	background-color: red;
+	padding: 2px 5px 3px 5px;
+}
+
+/* ---------------------------------------------------------
+   Contact List
+   --------------------------------------------------------- */
+
+div#list {
+	margin: 0px 10px 10px 0px;
+	width: 100%;
+}
+
+div#list form#search-box {
+	background-color: #01222d;
+	padding: 15px 15px 15px 15px;
+}
+
+div#list form#search-box .create {
+	cursor: pointer;
+	width: 90px;
+}
+
+div#list form#search-box input[type="text"] {
+	width: 370px;
+	font-size: 20px;
+	background-color: #002a36;
+	color: #829496;
+	border: none;
+	padding: 5px 5px 5px 5px;
+}
+
+div#list form#search-box label {
+	font-size: 20px;
+	color: #fdf6e3;
+	font-weight: bold;
+	border: none;
+	padding: 5px 5px 5px 5px;
+}
+
+div#list form#search-box input[type="button"] {
+	font-size: 20px;
+	color: #fdf6e3;
+	background-color: #073542;
+	border: none;
+	padding: 5px 5px 5px 5px;
+}
+
+div#list ul {
+	background-color: #002a36;
+	padding: 10px 20px 10px 20px;
+}
+
+div#list .contact {
+	clear: both;
+	font-size: 22px;
+	height: 25px;
+	line-height: 25px;
+	padding: 10px 10px 10px 10px;
+	margin: 20px 0 20px 0;
+	background-color: #073542;	
+}
+
+div#list li.contact .simple {
+	float: left;
+	width: 60%;
+}
+
+div#list li.contact .actions {
+	float: left;
+	width: 40%;
+	color: #fff;
+	text-align: right
+}	
+
+div#list li.contact .simple .name {
+	color: #fff;
+}
+
+div#list li.contact .detailed {
+	padding-top: 10px;
+}
+
+div#list li.contact .detailed .photo {
+	float: left;
+}
+
+div#list li.contact .detailed .text {
+	float: left;
+	color: #fff;
+	height: 100px;
+	padding-left: 10px;
+	font-size: 18px;
+	vertical-align: middle;
+}
+
+
+/* ---------------------------------------------------------
+   Contact Edit
+   --------------------------------------------------------- */
+
+form.edit {
+	background-color: #002a36;
+	font-size: 22px;
+}
+
+form.edit .fields {
+	padding: 0px 20px 20px 20px;
+}
+
+form.edit label {
+	margin-top: 20px;
+	color: #93a1a1;
+}
+
+form.edit .buttons {
+	padding-top: 20px;
+}
+
+form.edit .buttons input {
+	font-size: 20px;
+	color: #fdf6e3;
+	background-color: #073542;
+	border: none;
+	padding: 5px 5px 5px 5px;	
+}
+
+form.edit .back {
+	padding: 15px 15px 15px 15px;
+	background-color: #01222d;
+	cursor: pointer;
+}
+
+form.edit .back a {
+	text-decoration: none;
+}
+
+form.edit label {
+	display: block;
+	margin-bottom: 3px;
+}
+
+form.edit .fields input[type="text"] {
+	display: block;
+	width: 550px;
+	font-size: 20px;
+	color: #fdf6e3;
+	background-color: #073542;
+	border: none;
+	padding: 5px 5px 5px 5px;
+}
