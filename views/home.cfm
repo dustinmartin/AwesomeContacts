@@ -52,27 +52,29 @@
 
 <!-- Contact Form template -->
 <script type="text/template" id="contact-form-template">
-	<div class="back">
-		<a href="#contacts"><< back</a>
-	</div>
-	<div class="fields">
-		<label for="FirstName">First Name:</label>
-		<input class="first-name" type="text" value="<%= FirstName %>" />
-
-		<label for="LastName">Last Name:</label>
-		<input class="last-name" type="text" value="<%= LastName %>" />
-
-		<label for="Phone">Phone:</label>
-		<input class="phone" type="text" value="<%= Phone %>" />
-
-		<label for="Email">Email:</label>
-		<input class="email" type="text" value="<%= Email %>" />
-
-		<div class="buttons">
-			<input type="button" name="save" class="save" value="Save & Close" />
-			<input type="button" name="cancel" class="cancel" value="Cancel" />
+	<form name="ContactForm" class="edit">
+		<div class="back">
+			<a href="#contacts"><< back</a>
 		</div>
-	</div>
+		<div class="fields">
+			<label for="FirstName">First Name:</label>
+			<input name="FirstName" class="first-name" type="text" value="<%= FirstName %>" />
+
+			<label for="LastName">Last Name:</label>
+			<input name="LastName" class="last-name" type="text" value="<%= LastName %>" />
+
+			<label for="Phone">Phone:</label>
+			<input name="Phone" class="phone" type="text" value="<%= Phone %>" />
+
+			<label for="Email">Email:</label>
+			<input name="Email" class="email" type="text" value="<%= Email %>" />
+
+			<div class="buttons">
+				<input type="button" name="Save" class="save" value="Save & Close" />
+				<input type="button" name="Cancel" class="cancel" value="Cancel" />
+			</div>
+		</div>
+	</form>
 </script>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
