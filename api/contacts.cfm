@@ -1,7 +1,7 @@
 <cfscript>
 	contentType( type="application/json" );	
 
-	 try {
+	try {
 
 		// The ID of the contact to handle
 		id = "";
