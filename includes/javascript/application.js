@@ -28,13 +28,38 @@
 	};
 	model.Contact.prototype = {
 		validate: function(){
+			var errors = {};
 
+			// Some *extremely naive* regexes for validation.
+			// These should be replaced by something much more thorough later
+			var phoneRegex = new RegExp("^(1-)?[0-9]{3}(\s|\.|-){1}[0-9]{3}(-|\.){1}[0-9]{4}$");
+			var emailRegex = new RegExp("^[a-zA-Z0-9-_\.]+@[a-zA-Z0-9-_\.]+");
+			var nameRegex = new RegExp("^[a-zA-Z- ]+$");
+
+			if( !nameRegex.test(this.firstName) ){
+				errors.firstName = "Enter a valid first name";
+			}
+
+			if( !nameRegex.test(this.lastName) ){
+				errors.lastName = "Enter a valid last name";
+			}
+
+			if( !phoneRegex.test(this.phone) ){
+				errors.phone = "Enter a valid phone number";
+			}
+
+			if( !emailRegex.test(this.email) ){
+				errors.email = "Enter a valid email address";
+			}
+
+			return errors;
 		},
 		save: function(options){
 			var self = this;
 			var verb = "post";
-			var url = "index.cfm/api/contacts/";
+			var url = "api/contacts.cfm/";
 
+			// If there is an ID do a update
 			if( this.id !== "" ){
 				verb = "put";
 				url = url + this.id;
@@ -66,7 +91,7 @@
 		destroy: function(options){
 			var self = this;
 			$.ajax({
-				url: "index.cfm/api/contacts/" + self.id,
+				url: "api/contacts.cfm/" + self.id,
 				type: "delete",
 				dataType: "json",
 				success: function(data, textStatus, jqXHR){
@@ -80,6 +105,20 @@
 					}
 				}
 			});			
+		},
+		refresh: function(){
+			var self = this;
+			$.ajax({
+				url: "api/contacts.cfm/" + self.id,
+				type: "get",
+				dataType: "json",
+				success: function(data, textStatus, jqXHR){
+					self.firstName = data.FirstName;
+					self.lastName = data.LastName;
+					self.phone = data.phone;
+					self.email = data.email;
+				}
+			});	
 		}
 	};
 
@@ -92,7 +131,7 @@
 		fetch: function(options){
 			var self = this;
 			$.ajax({
-				url: "index.cfm/api/contacts",
+				url: "api/contacts.cfm",
 				type: "get",
 				dataType: "json",
 				success: function(data, textStatus, jqXHR){
@@ -116,9 +155,9 @@
 		},
 		get: function(id){
 			for( var i=0; i<=this.contacts.length-1; i++ ){
-				if( this.contacts[i].id === id ){
+				if( this.contacts[i].id == id ){ // Use == to allow type coercion
 					return this.contacts[i];
-				}				
+				}
 			}
 		},
 		load: function(contacts){
@@ -141,11 +180,14 @@
 		},
 		filter: function(searchTerm){
 			var self = this;
+
+			// Return a new collection rather than updating the current collection
 			var collection = new model.ContactCollection();
 			
 			// Split the search term into words
 			searchTerm = searchTerm.split(" ");
 
+			// Build the new collection that matches the search term
 			$.each(searchTerm,function(index,value){
 				if( value !== "" ){
 					var wordRegex = new RegExp( value, "i" );
@@ -240,8 +282,13 @@
 			}
 			else {
 				var searchTerm = this.element.find(".search-text").val();
-				var collection = this.model.filter( searchTerm );
-				this.renderItems( collection );
+				if( searchTerm === "" ){
+					this.reset();
+				}
+				else {
+					var collection = this.model.filter( searchTerm );
+					this.renderItems( collection );
+				}
 			}
 
 			event.preventDefault();
@@ -319,15 +366,38 @@
 			this.model.email = this.element.find(".email").val();
 			this.model.phone = this.element.find(".phone").val();
 
-			this.model.save({
-				success: function(){
-					self.remove();
-					window.location = "#/contacts";
-				},
-				error: function(){
-					alert("Error saving contact.");
-				}
-			});
+			var errors = this.model.validate();
+
+			if( errors.firstName ){
+				this.model.refresh(); // Revert the changes
+				alert("Please enter a valid First Name.");
+			}
+			else if( errors.lastName ){
+				this.model.refresh(); // Revert the changes
+				alert("Please enter a valid Last Name.");
+			}
+			else if( errors.phone ) {
+				this.model.refresh(); // Revert the changes
+				alert("Please enter a valid Phone Number.");
+			}
+			else if( errors.email ){
+				this.model.refresh(); // Revert the changes
+				alert("Please enter a valid Email Address.");
+			}
+			else {
+				this.model.save({
+					success: function(){
+						self.remove();
+						window.location = "#/contacts";
+					},
+					error: function(){
+						// Revert the changes
+						self.model.refresh();
+
+						alert("Error saving contact.");
+					}
+				});
+			}
 		},
 		cancel: function(){
 			if( this.model.firstName !== this.element.find(".first-name").val() ||
@@ -337,10 +407,12 @@
 
 				if( confirm("Are you sure you want to leave this page? You will lose any unsaved information.") ){
 					this.remove();
+					window.location = "#/contacts";
 				}
 			}
-
-			window.location = "#/contacts";
+			else {
+				window.location = "#/contacts";
+			}
 		}
 	};
 
@@ -482,6 +554,10 @@
 	// ----------------------------------------------------------
 
 	$(document).ready(function(){
+		if( window.location.hash !== "contacts" ){
+			window.location = "#/contacts";
+		}
+
 		var router = new utility.Router();
 		router.start();
 		

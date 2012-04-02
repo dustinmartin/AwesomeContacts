@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Awesome Contacts Plus: Now With More Awesome</title>
-		<link rel="stylesheet" href="/AwesomeContacts/includes/styles/reset.css">
-		<link rel="stylesheet" href="/AwesomeContacts/includes/styles/app.css">
+		<link rel="stylesheet" href="includes/styles/reset.css">
+		<link rel="stylesheet" href="includes/styles/app.css">
 		<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -92,7 +92,7 @@
 		<cfoutput>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.1/underscore-min.js"></script>
-		<script src="/AwesomeContacts/includes/javascript/application.js?i=#createUUID()#"></script>
+		<script src="includes/javascript/application.js?i=#createUUID()#"></script>
 		</cfoutput>
 	</body>
 </html>

@@ -3,9 +3,12 @@ component {
 	/**
 	* Constructor
 	*/
-	function init(){
+	public any function init(){
+
+		var file = getDirectoryFromPath( getCurrentTemplatePath() ) & "../data/contacts.json";
+
 		// Load the data
-		data = deserializeJSON( fileRead( expandPath("../data/contacts.json") ) );
+		data = deserializeJSON( fileRead( file ) );
 
 		// Convert the data to an array of object
 		for( var i=1; i<=arrayLen(data); i++ ){
@@ -24,24 +27,24 @@ component {
 	/**
 	* Returns an array of contact objects
 	*/
-	function list(){
+	public array function list(){
 		return data;
 	}
 
 	/**
 	* Returns a new contact object
 	*/
-	function new(data){
+	public any function new(data){
 		return new Contact(data);
 	}
 
 	/**
 	* Gets a contact object by its ID
 	*/
-	function get(id){
+	public any function get(id){
 		for( var contact in data ){
 			if( contact.getID() == id ){
-				return contact;
+				return duplicate(contact);
 			}
 		}
 	}
@@ -49,18 +52,35 @@ component {
 	/**
 	* Saves a new contact object to the array.
 	*/
-	function save(contact){
+	public void function save(contact){
 		var id = contact.getID();
-		if( isNull(id) || (isSimpleValue(id) && trim(id) != "") ){
-			contact.setID( javaCast( "string", data[ arrayLen(data) ].getID() + 1 ) );
+		if( isNull(id) || (isSimpleValue(id) && trim(id) == "") ){
+			// Create a new contact
+			if( arrayLen(data) ){
+				var newID = javaCast( "string", data[ arrayLen(data) ].getID() + 1 );
+			}
+			else {
+				var newID = 1;
+			}
+
+			contact.setID( newID );
 			arrayAppend(data,contact);
+		}
+		else {
+			// Update an existing contact
+			for( var oldContact in data ){
+				if( oldContact.getID() == id ){
+					oldContact.populate( contact.getMemento() );
+					break;
+				}
+			}
 		}
 	}
 
 	/**
 	* Deletes a contact object by its ID
 	*/
-	function delete(contact){
+	public void function delete(contact){
 		var id = contact.getID();
 		for( var i=1; i<=arrayLen(data); i++ ){
 			if( data[i].getID() == id ){
