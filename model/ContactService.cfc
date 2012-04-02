@@ -34,7 +34,7 @@ component {
 	/**
 	* Returns a new contact object
 	*/
-	public any function new(data){
+	public any function new(data={}){
 		return new Contact(data);
 	}
 

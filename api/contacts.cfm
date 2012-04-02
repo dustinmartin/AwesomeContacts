@@ -45,8 +45,8 @@
 					else {
 						contactService.save(contact);
 						data = contact;
-						statusCode = 200;
-						statusText = "Resource updated successfully";
+						statusCode = 201;
+						statusText = "Resource created successfully";
 					}
 				}
 

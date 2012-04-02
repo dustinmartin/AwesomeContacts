@@ -3,9 +3,10 @@
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimeSpan(0,0,30,0);
 	this.setClientCookies = true;
+	this.mappings["/model"] = getDirectoryFromPath( getCurrentTemplatePath() ) & "model";
 
 	function onApplicationStart(){
-		application.contactService = createObject("model.ContactService").init();
+		application.contactService = new model.ContactService();
 	}
 
 	function onRequestStart(){

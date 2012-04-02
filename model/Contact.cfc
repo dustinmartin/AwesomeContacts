@@ -7,8 +7,11 @@ component accessors="true" {
 	property name="Phone";
 	property name="Email";
 
-	function init(data){
-		populate(data);
+	function init(struct data={}){
+		if( structKeyExists(arguments,"data") ){
+			populate(data);
+		}
+
 		return this;
 	}
 
