@@ -121,11 +121,11 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 	function setup(){
-		this.baseURL = "http://localhost:8300/AwesomeContacts/api/contacts.cfm";
+		this.baseURL = cgi.http_host & request.appMapping & "/api/contacts.cfm";
 
 		// Reset the data
 		var request = new http(url=this.baseURL & "?reinit=1", method="get");
-		var result = request.send();		
+		var result = request.send();
 	}
 
 	function tearDown(){

@@ -4,8 +4,8 @@
 	DTS = createObject("component","mxunit.runner.DirectoryTestSuite");
 	excludes = "";
 	results = DTS.run(
-		directory     = expandPath("../tests/"),
-		componentPath = "",
+		directory     = expandPath("."),
+		componentPath = "tests",
 		recurse       = true,
 		excludes      = excludes
 	);
