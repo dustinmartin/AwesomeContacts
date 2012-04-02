@@ -108,17 +108,20 @@
 		},
 		refresh: function(){
 			var self = this;
-			$.ajax({
-				url: "api/contacts.cfm/" + self.id,
-				type: "get",
-				dataType: "json",
-				success: function(data, textStatus, jqXHR){
-					self.firstName = data.FirstName;
-					self.lastName = data.LastName;
-					self.phone = data.phone;
-					self.email = data.email;
-				}
-			});	
+
+			if( this.id && this.id !== "" ){
+				$.ajax({
+					url: "api/contacts.cfm/" + self.id,
+					type: "get",
+					dataType: "json",
+					success: function(data, textStatus, jqXHR){
+						self.firstName = data.FirstName;
+						self.lastName = data.LastName;
+						self.phone = data.phone;
+						self.email = data.email;
+					}
+				});	
+			}
 		}
 	};
 
