@@ -32,9 +32,9 @@
 
 			// Some *extremely naive* regexes for validation.
 			// These should be replaced by something much more thorough later
-			var phoneRegex = new RegExp("^(1-)?[0-9]{3}(\s|\.|-){1}[0-9]{3}(-|\.){1}[0-9]{4}$");
-			var emailRegex = new RegExp("^[a-zA-Z0-9-_\.]+@[a-zA-Z0-9-_\.]+");
-			var nameRegex = new RegExp("^[a-zA-Z- ]+$");
+			var phoneRegex = /^(1-)?[0-9]{3}(\s|\.|\-){1}[0-9]{3}(\-|\.){1}[0-9]{4}$/;
+			var emailRegex = /^[a-zA-Z0-9\-_\.]+@[a-zA-Z0-9\-_\.]+/;
+			var nameRegex = /^[a-zA-Z\- ]+$/;
 
 			if( !nameRegex.test(this.firstName) ){
 				errors.firstName = "Enter a valid first name";
