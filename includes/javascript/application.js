@@ -521,21 +521,21 @@
 
 		this.routes = [
 			{
-				mapping: new RegExp("^#\/contacts\/new$","i"),
+				mapping: /^#\/contacts\/new$/i,
 				handler: self.contactController.create
 			},
 			{
-				mapping: new RegExp("^#\/contacts\/edit\/[0-9]+$","i"),
-				parameter: new RegExp("[0-9]+$","i"),
+				mapping: /^#\/contacts\/edit\/[0-9]+$/i,
+				parameter: /[0-9]+$/i,
 				handler: self.contactController.edit
 			},
 			{
-				mapping: new RegExp("^#\/contacts\/delete\/[0-9]+$","i"),
-				parameter: new RegExp("[0-9]+$","i"),
+				mapping: /^#\/contacts\/delete\/[0-9]+$/i,
+				parameter: /[0-9]+$/i,
 				handler: self.contactController.destroy
 			},
 			{
-				mapping: new RegExp("^#\/contacts$","i"),
+				mapping: /^#\/contacts$/i,
 				handler: self.contactController.list
 			}
 		];
