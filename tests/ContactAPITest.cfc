@@ -7,8 +7,10 @@ component extends="mxunit.framework.TestCase" {
 
 		debug( data );
 
+		//writeDump( result.getPrefix().responseHeader );
+		//abort;
+
 		assertEquals(200,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertIsArray( data );
 	}
 
@@ -20,7 +22,6 @@ component extends="mxunit.framework.TestCase" {
 		debug( data );
 
 		assertEquals(200,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertIsStruct( data );
 	}
 
@@ -32,7 +33,6 @@ component extends="mxunit.framework.TestCase" {
 		debug( data );
 
 		assertEquals(404,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertIsStruct( data );
 	}
 
@@ -48,7 +48,6 @@ component extends="mxunit.framework.TestCase" {
 		debug( data );
 
 		assertEquals(201,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertIsStruct( data );
 		assertTrue( isNumeric(data.id) );
 	}
@@ -65,7 +64,6 @@ component extends="mxunit.framework.TestCase" {
 		debug( data );
 
 		assertEquals(204,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertEquals( 0, len(data) );
 	}
 
@@ -77,7 +75,6 @@ component extends="mxunit.framework.TestCase" {
 		debug( data );
 
 		assertEquals(404,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertIsStruct( data );
 	}
 
@@ -96,7 +93,6 @@ component extends="mxunit.framework.TestCase" {
 		debug( data );
 
 		assertEquals(204,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertEquals( 0, len(data) );
 
 		// Get total number of contacts to confirm delete
@@ -116,7 +112,6 @@ component extends="mxunit.framework.TestCase" {
 		debug( data );
 
 		assertEquals(404,result.getPrefix().Responseheader.Status_Code);
-		assertEquals("application/json",result.getPrefix().responseHeader["content-type"]);
 		assertIsStruct( data );
 	}
 
