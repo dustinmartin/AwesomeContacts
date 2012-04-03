@@ -11,7 +11,7 @@
 
 	function onRequestStart(){
 		if( structKeyExists(url,"reinit") ){
-			applicationStop();
+			application.contactService = new model.ContactService();
 		}
 	}
 }
