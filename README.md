@@ -1,6 +1,6 @@
 AwesomeContacts is a simple contact manager built with jQuery, Underscore.js, and ColdFusion.
 
-To install, drop all the code into the webroot under a folder call `AwesomeContacts`
+To install, drop all the code into the webroot under a folder called `AwesomeContacts`
 
 Requires ColdFusion 9.0.1
 
