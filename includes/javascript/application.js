@@ -153,6 +153,11 @@
 					if( options.success ){
 						options.success();
 					}
+				},
+				error: function(){
+					if( options.error ){
+						options.error();
+					}					
 				}
 			});
 		},
@@ -162,6 +167,9 @@
 					return this.contacts[i];
 				}
 			}
+		},
+		size: function(){
+			return this.contacts.length;
 		},
 		load: function(contacts){
 			this.contacts = contacts;
@@ -439,44 +447,63 @@
 			this.views.contactForm.remove();
 
 			var self = this;
-			this.models.contactCollection.fetch({
-				success: function(){
-					self.views.contactList.remove().render();
-
-					$("#application-container").append( self.views.contactList.element );
-				}
-			});
+			this.load(function(){
+				self.views.contactList.remove().render();
+				$("#application-container").append( self.views.contactList.element );
+			},true);
 		},
 		create: function(){
 			this.views.contactList.remove();
 
-			this.views.contactForm.model = new model.Contact();
-			this.views.contactForm.remove().render();
+			var self = this;
+			this.load(function(){
+				self.views.contactForm.model = new model.Contact();
+				self.views.contactForm.remove().render();
 
-			$("#application-container").append( this.views.contactForm.element );
+				$("#application-container").append( self.views.contactForm.element );
+			});
 		},
 		edit: function(id){
 			this.views.contactList.remove();
 
-			this.views.contactForm.model = this.models.contactCollection.get(id);
-			this.views.contactForm.remove().render();
+			var self = this;
+			this.load(function(){
+				self.views.contactForm.model = self.models.contactCollection.get(id);
+				self.views.contactForm.remove().render();
 
-			$("#application-container").append( this.views.contactForm.element );
+				$("#application-container").append( self.views.contactForm.element );
+			});
 		},
 		destroy: function(id){
-			if( confirm("Are you sure you want to delete the contact?") ){
-				var contact = this.models.contactCollection.get(id);
-				contact.destroy({
+			var self = this;
+			this.load(function(){
+				if( confirm("Are you sure you want to delete the contact?") ){
+					var contact = self.models.contactCollection.get(id);
+					contact.destroy({
+						success: function(){
+							window.location = "#/contacts";
+						},
+						error: function(){
+							alert("There was an error while trying to delete the contact.");
+						}
+					});
+				}
+				else {
+					window.location = "#/contacts";
+				}
+			});
+		},
+		load: function(callback,force){
+			if( !this.models.contactCollection.size() || force ){
+				var self = this;
+				this.models.contactCollection.fetch({
 					success: function(){
-						window.location = "#/contacts";
-					},
-					error: function(){
-						alert("There was an error while trying to delete the contact.");
+						callback();
 					}
 				});
 			}
 			else {
-				window.location = "#/contacts";
+				callback();				
 			}
 		}
 	};
@@ -557,10 +584,6 @@
 	// ----------------------------------------------------------
 
 	$(document).ready(function(){
-		if( window.location.hash !== "contacts" ){
-			window.location = "#/contacts";
-		}
-
 		var router = new utility.Router();
 		router.start();
 		
