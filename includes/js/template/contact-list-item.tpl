@@ -1,4 +1,3 @@
-<!-- Template for the single Contact list Item view -->
 <li class="contact">
 	<div class="simple">
 		<a class="name"><%= firstName %> <%= lastName %></a>

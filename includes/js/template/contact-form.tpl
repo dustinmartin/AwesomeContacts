@@ -1,4 +1,3 @@
-<!-- Contact Form template -->
 <form name="ContactForm" class="edit">
 	<div class="back">
 		<a href="#/contacts"><< back</a>

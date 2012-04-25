@@ -11,7 +11,7 @@
 		var ContactListItem = function(model){
 			this.model = model;
 			this.template = _.template( html );
-			this.element = null;		
+			this.element = null;
 		};
 		ContactListItem.prototype = {
 			render: function(){
@@ -31,10 +31,7 @@
 					this.element.animate({ height: "25px" }, 500);
 					more.removeClass("detail-visible");
 				}
-				else {
-
-					console.log( this.element );
-					
+				else {	
 					this.element.animate({ height: "110px" }, 500, function(){
 						details.fadeIn("fast");
 					});				
