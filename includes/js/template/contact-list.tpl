@@ -1,4 +1,3 @@
-<!-- Template for the Contact List view -->
 <div id="list">
 	<form name="searchbox" id="search-box">
 		<label for='search'>Search:</label>
